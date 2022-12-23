@@ -5,14 +5,13 @@ import { differenceInSeconds } from 'date-fns'
 
 import {
     CountDownContainer,
-    FormContainer,
     HomeContainer,
-    MinutesAmountInput,
     Separator,
     StartCountdownButton,
-    StopCountdownButton,
-    TaskInput
+    StopCountdownButton
 } from './styles'
+import { NewCycleForm } from './NewCycleForm'
+import { Countdown } from './Countdown'
 
 interface NewCycleFormData {
     task: string;
@@ -56,6 +55,8 @@ export function Home() {
                         }
                     }),
                     )
+                    setAmountSecondsPassed(totalSeconds)
+                    clearInterval(interval)
                 } else {
                     setAmountSecondsPassed(secondsDifference)
                 }
@@ -129,42 +130,8 @@ export function Home() {
     return (
         <HomeContainer>
             <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
-                <FormContainer>
-                    <label htmlFor="task">Vou trabalhar em</label>
-                    <TaskInput
-                        id="task"
-                        type="text"
-                        placeholder="Dê um nome para o seu projeto"
-                        list='task-suggestions'
-                        required
-                        {...register('task')}
-                    />
-                    <datalist id="task-suggestions">
-                        <option value="Projeto1"></option>
-                        <option value="Estudar"></option>
-                    </datalist>
-
-                    <label htmlFor="minutesAmount">durante</label>
-                    <MinutesAmountInput
-                        type="number"
-                        id="minutesAmount"
-                        min={1}
-                        max={60}
-                        step={5}
-                        required
-                        {...register('minutesAmount', { valueAsNumber: true })}
-
-                    />
-
-                    <span>minutos.</span>
-                </FormContainer>
-                <CountDownContainer>
-                    <span>{minutes[0]}</span>
-                    <span>{minutes[1]}</span>
-                    <Separator>:</Separator>
-                    <span>{seconds[0]}</span>
-                    <span>{seconds[1]}</span>
-                </CountDownContainer>
+                <NewCycleForm />
+                <Countdown  />
 
                 {!activeCycle ?
                     <StartCountdownButton disabled={isSubmitDisabled} type="submit">
