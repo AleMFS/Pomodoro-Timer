@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 body {
+    background: #25272a;
     background: ${props => props.theme["gray-900"]};
     color:${props => props.theme["gray-300"]};
     padding: 0 1rem;
