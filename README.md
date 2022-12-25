@@ -24,7 +24,7 @@ In the directory you can run:
 2. `npm run dev`
 
 
-![](/src/assets/timer-start.png)
+![](/src/assets/Timer-start.png)
 
 ![](/src/assets/Timer.png)
 
